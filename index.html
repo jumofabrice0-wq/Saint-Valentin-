@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYLLA Mariam 💖</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ff5f8a,#ff8fb1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:white;
+}
+
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    border-radius:24px;
+    padding:35px 25px;
+    width:90%;
+    max-width:420px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,0.25);
+    animation:fade 1.2s ease;
+}
+
+h1{
+    font-size:1.9em;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:1.05em;
+    line-height:1.6;
+    margin-bottom:30px;
+}
+
+.buttons{
+    position:relative;
+    height:140px;
+}
+
+button{
+    border:none;
+    padding:15px 32px;
+    border-radius:40px;
+    font-size:1em;
+    cursor:pointer;
+}
+
+#yesBtn{
+    background:white;
+    color:#ff3f7f;
+    font-weight:bold;
+    transition:transform .2s;
+}
+
+#yesBtn:hover{
+    transform:scale(1.12);
+}
+
+#noBtn{
+    position:absolute;
+    background:rgba(255,255,255,0.3);
+    color:white;
+    left:50%;
+    top:70px;
+    transform:translateX(-50%);
+}
+
+.heart{
+    position:absolute;
+    animation:float 4s linear;
+    opacity:.8;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes float{
+    from{transform:translateY(0);opacity:1}
+    to{transform:translateY(-140px);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_1c7a0a1f35.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <h1>SYLLA Mariam 💕</h1>
+    <p id="text">
+        Depuis le jour où je t’ai rencontrée,<br>
+        quelque chose en moi s’est calmé…<br>
+        et en même temps embrasé.
+        <br><br>
+        Ton sourire me désarme,<br>
+        ta voix me rassure,<br>
+        et ta présence… me donne envie de rester.
+        <br><br>
+        Dis-moi, veux-tu être ma Valentine ? 🌹
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn">Oui 💖</button>
+        <button id="noBtn">Non 🙈</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const text = document.getElementById("text");
+const music = document.getElementById("music");
+
+document.body.addEventListener("click", () => {
+    music.play().catch(()=>{});
+}, { once:true });
+
+function escapeButton(){
+    const maxX = window.innerWidth * 0.7;
+    const maxY = window.innerHeight * 0.5;
+    const x = Math.random() * maxX - maxX/2;
+    const y = Math.random() * maxY - maxY/2;
+    noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*20-10}deg)`;
+}
+
+noBtn.addEventListener("mouseenter", escapeButton);
+noBtn.addEventListener("touchstart", escapeButton);
+noBtn.addEventListener("click", escapeButton);
+
+yesBtn.addEventListener("click", () => {
+    text.innerHTML = `
+        💘 SYLLA Mariam… 💘<br><br>
+        Tu viens de faire battre mon cœur plus fort.
+        <br><br>
+        Je te promets des moments doux,<br>
+        des regards qui parlent sans mots,<br>
+        des silences confortables,<br>
+        et des rires qui n’en finissent pas.
+        <br><br>
+        Approche…  
+        cette histoire commence maintenant 💋
+    `;
+    document.querySelector(".buttons").remove();
+    showerHearts();
+});
+
+function showerHearts(){
+    setInterval(()=>{
+        const h=document.createElement("div");
+        h.className="heart";
+        h.textContent="❤️";
+        h.style.left=Math.random()*100+"vw";
+        h.style.bottom="-20px";
+        h.style.fontSize=Math.random()*18+18+"px";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+    },250);
+}
+</script>
+
+</body>
+</html>
